@@ -1,3 +1,12 @@
+export type MetricField = { current: number; previous: number; change: number };
+export type MetricKeys =
+  | "sales"
+  | "outOfStock"
+  | "totalInventory"
+  | "averageRank"
+  | "estTraffic"
+  | "estImpressions"
+  | "ctr";
 export interface DataItem {
   id: string;
   name: string;
@@ -8,6 +17,7 @@ export interface DataItem {
   estTraffic: { current: number; previous: number; change: number };
   estImpressions: { current: number; previous: number; change: number };
   ctr: { current: number; previous: number; change: number };
+  [key: string]: { current: number; previous: number; change: number } | string;
 }
 
 export interface FilterState {

@@ -16,7 +16,20 @@ export const formatPercentage = (value: number) => {
   return `${value}%`;
 };
 
-export const calculateTotals = (data: any[]) => {
+
+type Totals = {
+  sales: number;
+  outOfStock: number;
+  totalInventory: number;
+  averageRank: number;
+  estTraffic: number;
+  estImpressions: number;
+  ctr: number;
+};
+
+import type { DataItem, MetricKeys, MetricField } from "./types";
+
+export const calculateTotals = (data: DataItem[]): Totals => {
   return data.reduce((acc, item) => ({
     sales: acc.sales + item.sales.current,
     outOfStock: acc.outOfStock + item.outOfStock.current,
@@ -36,14 +49,12 @@ export const calculateTotals = (data: any[]) => {
   });
 };
 
-export const sortData = (data: any[], sortField: string, sortDirection: "asc" | "desc") => {
+export const sortData = (data: DataItem[], sortField: MetricKeys, sortDirection: "asc" | "desc") => {
   if (!sortField) return data;
-  
   return [...data].sort((a, b) => {
-    const aValue = (a as any)[sortField]?.current || 0;
-    const bValue = (b as any)[sortField]?.current || 0;
-    
-    if (sortDirection === 'asc') {
+    const aValue = (a[sortField] as MetricField)?.current || 0;
+    const bValue = (b[sortField] as MetricField)?.current || 0;
+    if (sortDirection === "asc") {
       return aValue - bValue;
     } else {
       return bValue - aValue;

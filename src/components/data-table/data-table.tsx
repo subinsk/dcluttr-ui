@@ -5,7 +5,7 @@ import React, { ReactNode, useState } from "react";
 import { DataCell } from "./data-cell";
 import { SortableHeader } from "./sortable-header";
 import { FilterDialog } from "./filter-dialog";
-import { FilterState, DataItem } from "./types";
+import { FilterState, DataItem, MetricKeys, MetricField } from "./types";
 import { calculateTotals, sortData, formatCurrency, formatNumber } from "./utils";
 
 interface DataTableProps {
@@ -28,7 +28,7 @@ export const DataTable = ({
     defaultSelected
 }: DataTableProps) => {
     const [selectedItems, setSelectedItems] = useState<string[]>(defaultSelected);
-    const [sortField, setSortField] = useState<string>("");
+    const [sortField, setSortField] = useState<MetricKeys | "">("");
     const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc");
     const [filterDialogOpen, setFilterDialogOpen] = useState(false);
     const [filters, setFilters] = useState<FilterState>({
@@ -73,7 +73,7 @@ export const DataTable = ({
                 setSortDirection("desc");
             }
         } else {
-            setSortField(field);
+            setSortField(field as MetricKeys);
             setSortDirection("desc");
         }
     };
@@ -145,7 +145,9 @@ export const DataTable = ({
     });
 
     const totals = calculateTotals(filteredData);
-    const sortedData = sortData(filteredData, sortField, sortDirection);
+    const sortedData = sortField
+      ? sortData(filteredData, sortField as MetricKeys, sortDirection)
+      : filteredData;
 
     const columns = [
         { key: 'sales', label: 'Sales', parent: "availability" },
@@ -294,12 +296,12 @@ export const DataTable = ({
                                                                 key={column.key}
                                                                 className={`text-center p-3${isLastOfParent ? " border-r border-gray-200" : ""}`}
                                                             >
-                                                                <DataCell item={item} field={column.key} isSelected={isSelected} />
+                                                                <DataCell item={{ [column.key]: item[column.key] as MetricField }} field={column.key} isSelected={isSelected} />
                                                             </td>
                                                         );
                                                     })}
                                                 <td className="text-center p-3">
-                                                    <DataCell item={item} field="ctr" isSelected={isSelected} />
+                                                    <DataCell item={{ ctr: item.ctr as MetricField }} field="ctr" isSelected={isSelected} />
                                                 </td>
                                             </tr>
                                         );

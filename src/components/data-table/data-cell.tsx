@@ -1,8 +1,17 @@
 import { ChangeIndicator } from "./change-indicator";
 import { formatCurrency, formatNumber, formatPercentage } from "./utils";
 
+
+interface DataValue {
+  current: number;
+  previous?: number;
+  change?: number;
+}
+
+import type { MetricField } from "./types";
+
 interface DataCellProps {
-  item: any;
+  item: Record<string, MetricField>;
   field: string;
   isSelected: boolean;
 }
@@ -32,7 +41,7 @@ export const DataCell = ({ item, field, isSelected }: DataCellProps) => {
         <span className="text-xs text-gray-500">
           {formatValue(data.previous, field)}
         </span>
-        <ChangeIndicator change={data.change} />
+        <ChangeIndicator change={data.change ?? 0} />
       </div>
     );
   }
