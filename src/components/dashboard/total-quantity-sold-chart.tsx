@@ -116,7 +116,7 @@ export function TotalQuantitySoldChart() {
             </defs>
             <Area
               dataKey="currentMonth"
-              type="natural"
+              type="linear"
               fill="url(#fillCurrentMonth)"
               fillOpacity={0.4}
               stroke="var(--color-currentMonth)"
@@ -124,7 +124,7 @@ export function TotalQuantitySoldChart() {
             />
             <Line
               dataKey="lastMonth"
-              type="natural"
+              type="linear"
               stroke="var(--color-lastMonth)"
               strokeWidth={2}
               strokeDasharray="5 5"
