@@ -22,7 +22,7 @@ export const SortableHeader = ({
   return (
     <button 
       onClick={() => onSort(field)}
-      className={`flex items-center gap-1 hover:text-primary w-full justify-center ${
+      className={`flex items-center gap-1 group hover:text-primary w-full justify-center ${
         isActive ? 'text-primary font-bold' : 'font-semibold'
       } ${className}`}
     >
@@ -34,7 +34,7 @@ export const SortableHeader = ({
           <ChevronUpIcon className="w-4 h-4 text-primary" />
         )
       ) : (
-        <ChevronDownIcon className="w-4 h-4 opacity-50" />
+        <ChevronDownIcon className="w-4 h-4 text-text-dark group-hover:text-primary" />
       )}
     </button>
   );

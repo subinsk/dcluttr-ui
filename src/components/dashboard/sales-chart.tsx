@@ -40,32 +40,32 @@ const chartConfig = {
 
 export function SalesChart() {
   return (
-    <BaseChart title="Sales (MRP)">
+    <BaseChart title="Sales (MRP)" className="">
       <div className="flex items-center justify-between px-3 py-3">
-        <p className="text-lg font-bold text-gray-800">
+        <p className="text-lg font-bold text-text-primary">
           125.49
         </p>
         <div className="flex flex-col">
           <div className="flex items-center justify-end">
-            <ArrowUp className="w-4 h-4 text-primary" />
-            <span className="text-sm font-bold text-primary ml-1">2.4%</span>
+            <ArrowUp className="w-4 h-4 text-text-success-icon" />
+            <span className="text-sm font-bold text-text-success ml-1">2.4%</span>
           </div>
-          <p className="text-sm text-gray-600">vs 119.69 last month</p>
+          <p className="text-sm text-text-muted">vs 119.69 last month</p>
         </div>
       </div>
-      <ChartContainer config={chartConfig} className="h-full w-full px-3 m-0">
+      <ChartContainer config={chartConfig} className="h-full w-full m-0 px-3">
         <ComposedChart
           accessibilityLayer
           data={chartData}
           margin={{
-            left: 12,
-            right: 12,
+            left: 24,
+            right: 24,
             top: 12,
             bottom: 12,
           }}
-          className="h-full w-full p-0 m-0"
+          className=""
         >
-          <CartesianGrid vertical={false} />
+          <CartesianGrid vertical={false} className=""/>
           <XAxis
             dataKey="month"
             tickLine={false}

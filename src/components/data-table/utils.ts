@@ -1,8 +1,8 @@
 export const formatCurrency = (value: number) => {
   if (value === 0) return "₹0";
-  if (value >= 100000) return `₹${(value / 100000).toFixed(2)}L`;
-  if (value >= 1000) return `₹${(value / 1000).toFixed(1)}k`;
-  return `₹${value.toFixed(2)}`;
+  if (value >= 100000) return `₹${(value)}`;
+  if (value >= 1000) return `₹${(value)}`;
+  return `₹${value}`;
 };
 
 export const formatNumber = (value: number) => {

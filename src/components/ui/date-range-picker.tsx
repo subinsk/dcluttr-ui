@@ -9,7 +9,7 @@ import {
 import { cn } from "@/lib/utils"
 import { Calendar } from "./calendar"
 import { addDays, format } from "date-fns"
-import { CalendarIcon, ChevronDown, ChevronUp } from "lucide-react"
+import { CalendarDays, CalendarIcon, ChevronDown, ChevronUp } from "lucide-react"
 import * as React from "react"
 import { type DateRange } from "react-day-picker"
 
@@ -30,29 +30,28 @@ export default function DateRangePicker({
             id="date"
             variant="outline"
             className={cn(
-              "w-[240px] justify-between text-left font-normal",
-              !date && "text-muted-foreground"
+              "w-[250px] text-text-primary gap-2 text-left justify-start border-border-primary px-4 py-2.5",
+              !date && ""
             )}
           >
-            <div className="flex items-center">
-              <CalendarIcon className="mr-2 h-4 w-4" />
-              {date?.from ? (
-                date.to ? (
-                  <>
-                    {format(date.from, "LLL dd, y")} -{" "}
-                    {format(date.to, "LLL dd, y")}
-                  </>
-                ) : (
-                  format(date.from, "LLL dd, y")
-                )
+
+            <CalendarDays className="text-text-primary" />
+            {date?.from ? (
+              date.to ? (
+                <>
+                  {format(date.from, "LLL dd, y")} -{" "}
+                  {format(date.to, "LLL dd, y")}
+                </>
               ) : (
-                <span>Pick a date</span>
-              )}
-            </div>
-            {open ? (
-              <ChevronUp className="h-4 w-4 opacity-50" />
+                format(date.from, "LLL dd, y")
+              )
             ) : (
-              <ChevronDown className="h-4 w-4 opacity-50" />
+              <span>Pick a date</span>
+            )}
+            {open ? (
+              <ChevronUp className="text-text-primary" />
+            ) : (
+              <ChevronDown className="text-text-primary" />
             )}
           </Button>
         </PopoverTrigger>

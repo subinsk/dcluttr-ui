@@ -11,11 +11,11 @@ export const ChangeIndicator = ({ change }: ChangeIndicatorProps) => {
   return (
     <div className="flex items-center justify-center gap-1">
       {isPositive ? (
-        <ArrowUpIcon className="w-3 h-3 text-green-600" />
+        <ArrowUpIcon className="w-3 h-3 text-primary" />
       ) : (
-        <ArrowDownIcon className="w-3 h-3 text-red-500" />
+        <ArrowDownIcon className="w-3 h-3 text-destructive" />
       )}
-      <span className={`text-xs font-medium ${isPositive ? 'text-green-600' : 'text-red-500'}`}>
+      <span className={`text-xs font-medium ${isPositive ? 'text-primary' : 'text-destructive'}`}>
         {Math.abs(change).toFixed(1)}%
       </span>
     </div>

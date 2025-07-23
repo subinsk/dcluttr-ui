@@ -159,11 +159,11 @@ export const DataTable = ({
     ];
 
     return (
-        <div className="space-y-6 max-w-4xl">
-            <div className="flex items-center justify-between">
-                <div>
-                    <h2 className="text-xl font-bold text-gray-900">{title}</h2>
-                    <p className="text-sm text-gray-600">{description}</p>
+        <div className="space-y-6 flex flex-col h-full">
+            <div className="flex items-center justify-between flex-shrink-0">
+                <div className="flex flex-col gap-1">
+                    <h2 className="text-xl font-bold text-text-primary">{title}</h2>
+                    <p className="text-sm text-text-secondary">{description}</p>
                 </div>
                 <FilterDialog
                     open={filterDialogOpen}
@@ -177,13 +177,12 @@ export const DataTable = ({
                 />
             </div>
 
-            {/* Active Filter Badges */}
             {getActiveFilters().length > 0 && (
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 flex-shrink-0">
                     {getActiveFilters().map((filter, index) => (
                         <div
                             key={index}
-                            className="inline-flex items-center gap-1 px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full"
+                            className="inline-flex items-center gap-1 px-3 py-1 bg-primary-background text-primary text-sm rounded-full"
                         >
                             <span className="font-medium">{filter.label}:</span>
                             <span>{filter.value}</span>
@@ -198,28 +197,29 @@ export const DataTable = ({
                 </div>
             )}
 
-            <div className="border border-gray-200 rounded-lg shadow-sm overflow-hidden">
-                <div className="overflow-x-auto">
-                    <table className="w-full min-w-[1200px]">
-                        <thead>
-                            <tr className="bg-white border-b border-gray-200">
-                                <th rowSpan={2} className="sticky left-0 bg-white text-left p-4 font-bold text-sm text-gray-900 border-r border-gray-200 w-48 z-50">
-                                    <div className="flex items-center gap-2">
-                                        {entityIcon}
-                                        {entityName} Name
-                                    </div>
-                                </th>
-                                <th colSpan={3} className="text-center p-3 font-bold text-sm text-gray-900 border-r border-gray-200">
-                                    Availability
-                                </th>
-                                <th colSpan={3} className="text-center p-3 font-bold text-sm text-gray-900 border-r border-gray-200">
-                                    Visibility
-                                </th>
-                                <th rowSpan={2} className="text-center p-3 font-bold text-sm text-gray-900 w-20">
-                                    CTR
-                                </th>
-                            </tr>
-                            <tr className="bg-white border-b border-gray-200">
+            <div className="border rounded-lg shadow-sm overflow-hidden flex-1 flex flex-col min-h-0">
+                <div className="flex-1 overflow-hidden">
+                    <div className="table-container h-full">
+                        <table className="w-full min-w-[1200px]">
+                            <thead>
+                                <tr className="bg-white border-b">
+                                    <th rowSpan={2} className="sticky left-0 bg-white text-left p-4 font-bold text-sm text-text-dark border-r w-48 z-50">
+                                        <div className="flex items-center gap-2">
+                                            {entityIcon}
+                                            {entityName} Name
+                                        </div>
+                                    </th>
+                                    <th colSpan={3} className="text-center p-3 font-bold text-sm text-text-dark border-r">
+                                        Availability
+                                    </th>
+                                    <th colSpan={3} className="text-center p-3 font-bold text-sm text-text-dark border-r">
+                                        Visibility
+                                    </th>
+                                    <th rowSpan={2} className="text-center p-3 font-bold text-sm text-text-dark w-20">
+                                        CTR
+                                    </th>
+                                </tr>
+                            <tr className="bg-white border-b">
                                 {(() => {
                                     const parentGroups: Record<string, { key: string; label: string }[]> = {};
                                     columns.forEach(col => {
@@ -233,7 +233,7 @@ export const DataTable = ({
                                             return (
                                                 <th
                                                     key={col.key}
-                                                    className={`text-center p-3 font-normal text-sm text-gray-700${isLast ? " border-r border-gray-200" : ""}`}
+                                                    className={`text-center p-3 font-normal text-sm text-text-dark ${isLast ? " border-r" : ""}`}
                                                 >
                                                     <SortableHeader
                                                         label={col.label}
@@ -273,17 +273,17 @@ export const DataTable = ({
                                         return (
                                             <tr
                                                 key={item.id}
-                                                className={`border-b border-gray-200 hover:bg-gray-100 ${isSelected ? 'bg-gray-50' : index % 2 === 0 ? 'bg-white' : 'bg-gray-50'
+                                                className={`border-b hover:bg-gray-100 ${isSelected ? 'bg-background-tertiary' : 'bg-background-secondary'
                                                     }`}
                                             >
-                                                <td className="sticky left-0 bg-inherit p-4 border-r border-gray-200">
+                                                <td className="sticky left-0 bg-inherit p-4 border-r">
                                                     <div className="flex items-center gap-3">
                                                         <Checkbox
                                                             checked={isSelected}
                                                             onCheckedChange={() => handleItemToggle(item.id)}
                                                             className="data-[state=checked]:bg-primary data-[state=checked]:border-primary"
                                                         />
-                                                        <span className="font-medium text-sm text-gray-900 underline hover:no-underline cursor-pointer">
+                                                        <span className="font-semibold text-sm text-text-content underline hover:no-underline cursor-pointer">
                                                             {item.name}
                                                         </span>
                                                     </div>
@@ -294,7 +294,7 @@ export const DataTable = ({
                                                         return (
                                                             <td
                                                                 key={column.key}
-                                                                className={`text-center p-3${isLastOfParent ? " border-r border-gray-200" : ""}`}
+                                                                className={`text-center text-border-cell p-3 ${isLastOfParent ? " border-r" : ""}`}
                                                             >
                                                                 <DataCell item={{ [column.key]: item[column.key] as MetricField }} field={column.key} isSelected={isSelected} />
                                                             </td>
@@ -307,30 +307,29 @@ export const DataTable = ({
                                         );
                                     })}
 
-                                    {/* Total Row */}
-                                    <tr className="bg-[#FCFCFC] border-t border-gray-300 font-bold">
-                                        <td className="bg-[#FCFCFC] sticky left-0 p-4 text-gray-900 border-r border-gray-200">
+                                    <tr className="bg-background-secondary border-t font-bold">
+                                        <td className="bg-background-secondary sticky left-0 p-4 text-text-content border-r">
                                             Total
                                         </td>
-                                        <td className="text-center p-3 text-gray-900 border-gray-200">
+                                        <td className="text-center p-3 text-text-content">
                                             {formatCurrency(totals.sales)}
                                         </td>
-                                        <td className="text-center p-3 text-gray-900 border-gray-200">
+                                        <td className="text-center p-3 text-text-content">
                                             {filteredData.length > 0 ? (totals.outOfStock / filteredData.length).toFixed(1) : 0}%
                                         </td>
-                                        <td className="text-center p-3 text-gray-900 border-r border-gray-200">
+                                        <td className="text-center p-3 text-text-content border-r">
                                             {formatNumber(totals.totalInventory)}
                                         </td>
-                                        <td className="text-center p-3 text-gray-900 border-gray-200">
+                                        <td className="text-center p-3 text-text-content">
                                             {filteredData.length > 0 ? (totals.averageRank / filteredData.length).toFixed(1) : 0}
                                         </td>
-                                        <td className="text-center p-3 text-gray-900 border-gray-200">
+                                        <td className="text-center p-3 text-text-content">
                                             {formatNumber(totals.estTraffic)}
                                         </td>
-                                        <td className="text-center p-3 text-gray-900 border-gray-200">
+                                        <td className="text-center p-3 text-text-content">
                                             {formatNumber(totals.estImpressions)}
                                         </td>
-                                        <td className="text-center p-3 text-gray-900">
+                                        <td className="text-center p-3 text-text-content">
                                             {filteredData.length > 0 ? (totals.ctr / filteredData.length).toFixed(2) : 0}%
                                         </td>
                                     </tr>
@@ -341,5 +340,6 @@ export const DataTable = ({
                 </div>
             </div>
         </div>
+    </div>
     );
 };

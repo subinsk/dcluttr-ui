@@ -2,13 +2,14 @@ import { ArrowDownIcon, ArrowUpIcon } from "lucide-react"
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "../ui/chart"
 import { Label, PolarRadiusAxis, RadialBar, RadialBarChart } from "recharts"
 import { BaseChart } from "./base-chart"
+import { useSidebar } from "../ui/sidebar"
 
 export const TopCitiesChart = () => {
     const data = [
         {
             id: "new-delhi",
             label: "New Delhi",
-            color: "#6C4FED",
+            color: "var(--color-chart-purple)",
             price: 26.5,
             percentage: 35,
             changeInPercentage: 1.2,
@@ -16,7 +17,7 @@ export const TopCitiesChart = () => {
         {
             id: "mumbai",
             label: "Mumbai",
-            color: "#EA6153",
+            color: "var(--color-chart-red)",
             price: 36.4,
             percentage: 23,
             changeInPercentage: -3.3,
@@ -24,7 +25,7 @@ export const TopCitiesChart = () => {
         {
             id: "west-bengal",
             label: "West Bengal",
-            color: "#F7C245",
+            color: "var(--color-chart-yellow)",
             price: 12.2,
             percentage: 21,
             changeInPercentage: -2.3,
@@ -32,7 +33,7 @@ export const TopCitiesChart = () => {
         {
             id: "others",
             label: "Others",
-            color: "#D9D9D9",
+            color: "var(--color-chart-gray)",
             price: 24.3,
             percentage: 9,
             changeInPercentage: 1.09,
@@ -57,9 +58,11 @@ export const TopCitiesChart = () => {
         }, {} as Record<string, number>),
     }]
 
+    const { isCollapsed } = useSidebar()
+
     return (
-        <BaseChart title="Top Cities" className="w-72">
-            <div className="relative h-[300px]">
+        <BaseChart title="Top Cities">
+            <div className="relative h-full">
                 <ChartContainer
                     config={chartConfig}
                     className="aspect-square"
@@ -82,22 +85,22 @@ export const TopCitiesChart = () => {
                                             <text x={viewBox.cx} y={viewBox.cy} textAnchor="middle">
                                                 <tspan
                                                     x={viewBox.cx}
-                                                    y={(viewBox.cy || 0) - 54}
-                                                    className="fill-muted-foreground"
+                                                    y={(viewBox.cy || 0) - 43}
+                                                    className="fill-muted-foreground font-normal text-sm"
                                                 >
                                                     Total
                                                 </tspan>
                                                 <tspan
                                                     x={viewBox.cx}
-                                                    y={(viewBox.cy || 0) - 24}
-                                                    className="fill-foreground text-3xl font-bold"
+                                                    y={(viewBox.cy || 0) - 19}
+                                                    className="fill-foreground text-lg font-bold"
                                                 >
-                                                    ₹{totalPrice.toLocaleString()}
+                                                    ₹{totalPrice.toLocaleString()}L
                                                 </tspan>
                                                 <tspan
                                                     x={viewBox.cx}
                                                     y={(viewBox.cy || 0) - 0}
-                                                    className={`fill-${data.reduce((acc, item) => acc + item.changeInPercentage, 0) > 0 ? "primary" : "destructive"} text-sm`}
+                                                    className={`${data.reduce((acc, item) => acc + item.changeInPercentage, 0) > 0 ? "fill-primary" : "fill-destructive"} text-sm`}
                                                 >
                                                     {data.reduce((acc, item) => acc + item.changeInPercentage, 0).toFixed(2)}%
                                                 </tspan>
@@ -121,22 +124,22 @@ export const TopCitiesChart = () => {
                         }
                     </RadialBarChart>
                 </ChartContainer>
-                <div className="absolute bottom-0 left-0 right-0 flex flex-col gap-2 px-3 py-2">
+                <div className={`absolute ${isCollapsed ? "bottom-3" : "-bottom-6"} left-0 right-0 flex flex-col gap-2 px-3 py-2`}>
                     {
                         data.map((item) => (
                             <div key={item.id} className="flex items-center justify-between gap-4">
                                 <div className="flex items-center gap-2">
                                     <div
-                                        className="w-3 h-3 rounded-full"
+                                        className="w-1.5 h-1.5 rounded-full"
                                         style={{ backgroundColor: item.color }}
                                     />
-                                    <span className="text-sm font-medium text-gray-800">{item.label}</span>
+                                    <span className="text-sm font-normal text-text-tertiary">{item.label}</span>
                                 </div>
-                                <div className="flex items-center gap-2">
-                                    <span className="text-sm font-medium text-gray-600">
-                                        ₹{item.price.toLocaleString()}
+                                <div className="flex items-center">
+                                    <span className="text-sm font-bold mr-1">
+                                        ₹{item.price.toLocaleString()}L
                                     </span>
-                                    <span className="text-sm bg-gray-200 text-gray-700 p-0.5 rounded w-10 flex items-center justify-center">
+                                    <span className="mr-1 text-sm bg-background-muted text-text-tertiary p-0.5 rounded w-10 flex items-center justify-center">
                                         {item.percentage}%
                                     </span>
                                     <div className="flex items-center">

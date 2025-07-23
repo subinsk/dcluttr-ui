@@ -25,6 +25,32 @@
   --color-input: var(--input);
   --color-border: var(--border);
   --color-destructive: var(--destructive);
+  
+  /* Custom Project Colors */
+  --color-brand-primary: var(--brand-primary);
+  --color-brand-secondary: var(--brand-secondary);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+  --color-text-dark: var(--text-dark);
+  --color-text-content: var(--text-content);
+  --color-text-muted: var(--text-muted);
+  --color-text-success: var(--text-success);
+  --color-text-success-icon: var(--text-success-icon);
+  --color-text-placeholder: var(--text-placeholder);
+  --color-background-primary: var(--background-primary);
+  --color-background-secondary: var(--background-secondary);
+  --color-background-tertiary: var(--background-tertiary);
+  --color-background-muted: var(--background-muted);
+  --color-border-primary: var(--border-primary);
+  --color-border-secondary: var(--border-secondary);
+  --color-border-light: var(--border-light);
+  --color-border-tab: var(--border-tab);
+  --color-border-cell: var(--border-cell);
+  --color-chart-purple: var(--chart-purple);
+  --color-chart-red: var(--chart-red);
+  --color-chart-yellow: var(--chart-yellow);
+  --color-chart-gray: var(--chart-gray);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent: var(--accent);
   --color-muted-foreground: var(--muted-foreground);
@@ -61,8 +87,8 @@
   --muted-foreground: oklch(0.556 0 0);
   --accent: oklch(0.97 0 0);
   --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
+  --destructive: #F31D1D;
+  --border: #F1F1F1;
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
   --chart-1: oklch(0.646 0.222 41.116);
@@ -70,6 +96,32 @@
   --chart-3: oklch(12.698% 0.00226 197.227);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
+  
+  /* Custom Project Colors */
+  --brand-primary: #309E96;
+  --brand-secondary: #9106FF;
+  --text-primary: #031B15;
+  --text-secondary: #4F4D55;
+  --text-tertiary: #7D7D7E;
+  --text-dark: #013025;
+  --text-content: #0A090B;
+  --text-muted: #031B1599;
+  --text-success: #1D874F;
+  --text-success-icon: #027056;
+  --text-placeholder: #515153;
+  --background-primary: #FAFAFA;
+  --background-secondary: #FCFCFC;
+  --background-tertiary: #F7F7F7;
+  --background-muted: #F7F7F7;
+  --border-primary: #D9D9D9;
+  --border-secondary: #EBEBEB;
+  --border-light: #F1F1F1;
+  --border-tab: #031B151A;
+  --border-cell: #4E5E5A;
+  --chart-purple: #6C4FED;
+  --chart-red: #EA6153;
+  --chart-yellow: #F7C245;
+  --chart-gray: #D9D9D9;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
@@ -120,5 +172,30 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+  
+  /* Hide scrollbars while maintaining scrollability */
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+  }
+  .scrollbar-hide::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+  }
+  
+  /* Custom scrollable container for tables */
+  .table-container {
+    overflow: auto;
+    max-height: 100%;
+    max-width: 100%;
+  }
+  
+  .table-container::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .table-container {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }

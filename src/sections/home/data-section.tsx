@@ -6,14 +6,14 @@ import { ArrowDownIcon, ArrowUpIcon, Badge, HelpCircle, LineChart, PieChart } fr
 
 export const DataSection = () => {
   return (
-    <div className="grid grid-cols-3 gap-4 w-full">
-      <div className="cols-span-1 h-full">
+    <div className="flex items-center flex-wrap gap-4 mr-auto">
+      <div className="h-full">
         <SalesChart />
       </div>
-      <div className="cols-span-1 h-full">
+      <div className="h-full">
         <TotalQuantitySoldChart/>
       </div>
-      <div className="cols-span-1 h-full">
+      <div className="h-full">
        <TopCitiesChart/>
       </div>
     </div>

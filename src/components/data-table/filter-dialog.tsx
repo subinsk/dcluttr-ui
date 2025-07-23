@@ -32,7 +32,6 @@ export const FilterDialog = ({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogTrigger asChild>
         <Button className="bg-primary hover:bg-primary/80 text-white gap-2">
-          <Filter className="w-4 h-4" />
           Filters({selectedCount})
           <ChevronDownIcon className="w-4 h-4" />
         </Button>
